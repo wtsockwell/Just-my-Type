@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     let gameSpace = $("body")
     //Sentence and character selectors
-    let sentences = ['ten ate neite ate nee enet ite ate inet ent eate', 'Too ato too nOt enot one totA not anot tOO aNot', 'oat itain oat tain nate eate tea anne inant nean', 'itant eate anot eat nato inate eat anot tain eat', 'nee ene ate ite tent tiet ent ine ene ete ene ate'];
+    let sentences = ["test1","test2","test3","test4","test5"];
     let sentenceNum = 0
     let charNum = 0
     let typeChar = sentences[sentenceNum].charAt(charNum)
@@ -36,37 +36,52 @@ $(document).ready(function () {
         }
     })
     //Sentence and type display functionality with the characters only changing on correct key presses
-    gameSpace.keydown(function(event){
+    gameSpace.keydown(function (event) {
         let character = event.key
-        if(characterCount == sentences[sentenceNum].length){
-            sentenceNum++
+        
+        if (characterCount == sentences[sentenceNum].length) {
             characterCount = 0
             charNum = 0
             typeChar = sentences[sentenceNum].charAt(charNum)
             $("#sentence").empty()
+            sentenceNum++
             $("#sentence").append(sentences[sentenceNum])
-            console.log("next sentence")
             $("#target-letter").append(typeChar)
+            console.log(sentenceNum)
+            //Reset functionality while maintaining sentence structure
+            if (sentenceNum == sentences.length) {
+                $("#target-letter").empty()
+                let startBtn = $("<button>Play again?</button>").prependTo(".keyboard-container")
+                startBtn.click(function () {
+                    sentenceNum = 0
+                    characterCount = 0
+                    charNum = 0
+                    startBtn.hide()
+                    $("#sentence").empty()
+                    $("#sentence").append(sentences[sentenceNum])
+                    $("#target-letter").append(typeChar)
+                    
+                })
+            }
         }
-        if(character == typeChar){
+        if (character == typeChar) {
             charNum++
             typeChar = sentences[sentenceNum].charAt(charNum)
             $("#target-letter").empty()
             $("#target-letter").append(typeChar)
             characterCount++
-            console.log(characterCount)
-            console.log(charNum)
+
         }
     })
-    
-    
-    
+
+
+
     gameSpace.keyup(function (e) {
         if (e.key == "Shift") {
             $("#keyboard-upper-container").hide();
             $("#keyboard-lower-container").show();
         }
     })
-    
+
 
 })
