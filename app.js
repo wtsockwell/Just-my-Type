@@ -4,7 +4,7 @@ $(document).ready(function () {
     
     let gameSpace = $("body")
     //Sentence and character selectors
-    let sentences = ["test1","test2","test3","test4","test5"];
+    let sentences = ["Test1","test2","test3","test4","test5"];
     let sentenceNum = 0
     let charNum = 0
     let typeChar = sentences[sentenceNum].charAt(charNum)
@@ -17,6 +17,7 @@ $(document).ready(function () {
     gameSpace.keydown(function (event) {
         let character = event.key
 
+            //Setting up light up characters on the page as well as proper board states
         if (event.shiftKey == true) {
             $("#keyboard-lower-container").hide();
             $("#keyboard-upper-container").show();
@@ -43,6 +44,8 @@ $(document).ready(function () {
         let character = event.key
         let correct = $("<span>\u2713</span>").css("color", "#1DA237")
         let wrong = $("<span>X</span>").css("color", "#CD2626")
+
+        //When typing characters this section will present them front and center as well as remove them when correct
         if (character == typeChar) {
             charNum++
             typeChar = sentences[sentenceNum].charAt(charNum)
@@ -53,11 +56,13 @@ $(document).ready(function () {
             if (typeChar == 32){
                 wordCount++
             }
+        } else if (character == "Shift"){
+            
         } else {
             $("#feedback").append(wrong)
             mistakes++
         }
-        
+        //Segment for changing of sentences
         if (characterCount == sentences[sentenceNum].length) {
             characterCount = 0
             charNum = 0
@@ -91,7 +96,7 @@ $(document).ready(function () {
     })
 
 
-
+//Used to return the board back to lower case after Shift key has been pressed, and only when Shift is released
     gameSpace.keyup(function (e) {
         if (e.key == "Shift") {
             $("#keyboard-upper-container").hide();
