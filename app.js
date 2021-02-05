@@ -69,6 +69,10 @@ $(document).ready(function () {
             $("#target-letter").append(typeChar)
             characterCount++
             $("#feedback").append(correct)
+            //Animation for moving the highlight cursor
+            $("#yellow-block").animate({
+                left: "+=17px"
+            }, 100)
             if (typeChar == 32){
                 wordCount++
             }
@@ -89,6 +93,9 @@ $(document).ready(function () {
             $("#sentence").append(sentences[sentenceNum])
             $("#target-letter").append(typeChar)
             $("#feedback").empty()
+            $("#yellow-block").animate({
+                left: "20px"
+            }, 100)
             //Reset functionality while maintaining sentence structure
             if (sentenceNum == sentences.length) {
                 $("#target-letter").empty()
