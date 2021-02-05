@@ -13,6 +13,19 @@ $(document).ready(function () {
     let mistakes = 0
     $("#sentence").append(sentences[sentenceNum])
     $("#target-letter").append(typeChar)
+    
+    //Timer set up for the WPM program
+    let seconds = 0
+    let minutes = (seconds/60)
+    setInterval(setTime, 1000)
+    
+    function setTime(){
+        seconds++
+    }
+    
+
+    setTime();
+
 
     gameSpace.keydown(function (event) {
         let character = event.key
@@ -44,6 +57,9 @@ $(document).ready(function () {
         let character = event.key
         let correct = $("<span>\u2713</span>").css("color", "#1DA237")
         let wrong = $("<span>X</span>").css("color", "#CD2626")
+        minutes = (seconds/60)
+        
+
 
         //When typing characters this section will present them front and center as well as remove them when correct
         if (character == typeChar) {
@@ -76,15 +92,16 @@ $(document).ready(function () {
             //Reset functionality while maintaining sentence structure
             if (sentenceNum == sentences.length) {
                 $("#target-letter").empty()
-                let wordsPM = (wordCount/.2)-(2*mistakes)
+                let wordsPM = Math.floor((wordCount/minutes)-(2*mistakes))
                 let startBtn = $("<button>Play again?</button>").prependTo(".keyboard-container")
-                $("#feedback").append(wordsPM + "Words per Minute")
+                $("#feedback").append(wordsPM + " Words per Minute")
                 startBtn.click(function () {
                     sentenceNum = 0
                     characterCount = 0
                     charNum = 0
                     wordCount = 0
                     mistakes = 0
+                    seconds = 0
                     startBtn.hide()
                     $("#sentence").empty()
                     $("#sentence").append(sentences[sentenceNum])
