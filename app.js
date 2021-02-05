@@ -4,7 +4,7 @@ $(document).ready(function () {
     
     let gameSpace = $("body")
     //Sentence and character selectors
-    let sentences = ["Test1","test2","test3","test4","test5"];
+    let sentences = ['ten ate neite ate nee enet ite ate inet ent eate', 'Too ato too nOt enot one totA not anot tOO aNot', 'oat itain oat tain nate eate tea anne inant nean', 'itant eate anot eat nato inate eat anot tain eat', 'nee ene ate ite tent tiet ent ine ene ete ene ate'];
     let sentenceNum = 0
     let charNum = 0
     let typeChar = sentences[sentenceNum].charAt(charNum)
@@ -71,7 +71,7 @@ $(document).ready(function () {
             $("#feedback").append(correct)
             //Animation for moving the highlight cursor
             $("#yellow-block").animate({
-                left: "+=17px"
+                left: "+=17.4px"
             }, 100)
             if (typeChar == 32){
                 wordCount++
@@ -84,17 +84,17 @@ $(document).ready(function () {
         }
         //Segment for changing of sentences
         if (characterCount == sentences[sentenceNum].length) {
+            sentenceNum++
+            wordCount++
             characterCount = 0
             charNum = 0
             typeChar = sentences[sentenceNum].charAt(charNum)
             $("#sentence").empty()
-            sentenceNum++
-            wordCount++
             $("#sentence").append(sentences[sentenceNum])
-            $("#target-letter").append(typeChar)
             $("#feedback").empty()
+            $("#target-letter").append(typeChar)
             $("#yellow-block").animate({
-                left: "20px"
+                left: "18px"
             }, 100)
             //Reset functionality while maintaining sentence structure
             if (sentenceNum == sentences.length) {
